@@ -24,7 +24,7 @@
 	    "Show window tags"
   	(let* ((win (or argwin (current-window)))
 	       (tags (xlib:get-property (window-xwin win) :STUMPWM_TAGS))
-	       (tagstring (utf8-to-string tags))
+	       (tagstring (stumpwm::utf8-to-string tags))
 	       (taglist 
 		 (if tags (string-split-by-spaces tagstring) nil)))
 	  (if argwin taglist (message "Tags: ~{~%~a~}" taglist))))
@@ -36,7 +36,7 @@
 	   (tagstring (format nil "~{~a ~}" (mapcar 'string-upcase newtags))))
 	  (xlib:change-property (window-xwin win)
 				:STUMPWM_TAGS
-				(string-to-utf8 tagstring)
+				(stumpwm::string-to-utf8 tagstring)
 				:UTF8_STRING 8)))
 
 (defun clear-tags-if (clearp &optional (argwin nil))
